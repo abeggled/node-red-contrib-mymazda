@@ -26,34 +26,30 @@ module.exports = function (RED) {
             send({ ...msg, topic: 'info', payload: info })
             break
 
-          case 'getStatus':
+          case 'getVehicleStatus':
             // Retrieve realtime status of vehicle
             getStatus(msg)
             break
-
-          case 'startPolling':
-            // Start polling of `getStatus`; outputs status on interval
-            // Interval should be given in seconds; Default 5 minutes, minimum 10 seconds
-            clearInterval(node.pollTimer)
-            let intervalSecs = Math.min(opts.interval ?? 300, 10)
-            node.pollTimer = setInterval(getStatus, intervalSecs * 1000)
-            getStatus()
+          case 'getEVVehicleStatus':
+              // Retrieve realtime status of vehicle
+              getEVStatus(msg)
+              break
+          case 'getHVACSetting':
+            // Retrieve realtime status of vehicle
+            getHVACSetting(msg)
             break
-
-          case 'stopPolling':
-            clearInterval(node.pollTimer)
-            break
-
           case 'startEngine':
           case 'stopEngine':
           case 'lockDoors':
           case 'unlockDoors':
           case 'turnHazardLightsOn':
           case 'turnHazardLightsOff':
-            await client[cmd](vehicleId)
-            // Nothing to ouput
-            break
-
+          case 'turnOnHVAC':
+          case 'turnOffHVAC':
+          case 'refreshVehicleStatus':
+              await client[cmd](vehicleId)
+              // Nothing to ouput
+              break
           default:
             node.warn(`Command not supported: ${cmd}`)
         }
@@ -65,6 +61,24 @@ module.exports = function (RED) {
     async function getStatus(passMsg = {}) {
       try {
         let status = await client.getVehicleStatus(vehicleId)
+        node.send({ ...passMsg, topic: 'status', payload: status })
+      } catch (err) {
+        node.error(err)
+      }
+    }
+
+    async function getEVStatus(passMsg = {}) {
+      try {
+        let status = await client.getEVVehicleStatus(vehicleId)
+        node.send({ ...passMsg, topic: 'status', payload: status })
+      } catch (err) {
+        node.error(err)
+      }
+    }
+
+    async function getHVACSetting(passMsg = {}) {
+      try {
+        let status = await client.getHVACSetting(vehicleId)
         node.send({ ...passMsg, topic: 'status', payload: status })
       } catch (err) {
         node.error(err)
