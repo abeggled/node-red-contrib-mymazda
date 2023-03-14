@@ -1,0 +1,27 @@
+{
+  "name": "node-red-contrib-mymazda",
+  "version": "0.0.1",
+  "description": "Node-RED node to connect to a Mazda car that has Mazda Connected Services enabled",
+  "main": "index.js",
+  "scripts": {},
+  "author": "abeggled",
+  "license": "MIT",
+  "dependencies": {
+    "node-mymazda": "^1.1.4"
+  },
+  "node-red": {
+    "nodes": {
+      "mymazda-car": "red/mymazda-car.js",
+      "mymazda-account": "red/mymazda-account.js"
+    }
+  },
+  "keywords": [
+    "node-red",
+    "mazda"
+  ],
+  "homepage": "https://github.com/abeggled/node-red-contrib-mymazda",
+  "repository": "github:abeggled/node-red-contrib-mymazda",
+  "engines": {
+    "node": ">=14"
+  }
+}
