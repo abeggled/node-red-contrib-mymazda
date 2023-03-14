@@ -98,37 +98,49 @@
       Must be one of the following strings:
       <ul>
         <li>
-          <code>getInfo</code> - Retrieves identifying information about the vehicle and sends to
-          output (See
-          <a href="https://github.com/bdr99/node-mymazda#get-list-of-vehicles">API docs</a> for
-          details)
-          <br />
-          <span style="font-size: small; font-style: italic">
-            Optionally set <code>options.refetch</code> to <code>true</code> to force the client to
-            request the vehicle info from the account. Otherwise, the cache is used.
-          </span>
+          <code>getInfo</code> - Retrieves identifying information about the vehicle and sends to output</li>
+        <li>
+          <code>getVehicleStatus</code> - Retrieves status of the vehicle and sends to output
         </li>
         <li>
-          <code>getStatus</code> - Retrieves status of the vehicle and sends to output (See
-          <a href="https://github.com/bdr99/node-mymazda#get-vehicle-status">API docs</a> for
-          details)
+          <code>getEVVehicleStatus</code> - Retrieves EV specific status of the vehicle and sends to output
         </li>
         <li>
-          <code>startPolling</code> - Begins polling using the <code>getStatus</code> command
-          <br />
-          <span style="font-size: small; font-style: italic">
-            Optionally set <code>options.interval</code> to a number of seconds greater than 10
-          </span>
+          <code>getHVACSetting</code> - Retrieves HVAC status of the vehicle (EV only)
         </li>
-        <li><code>stopPolling</code> - Ends polling</li>
-        <li><code>startEngine</code> - Starts vehicle</li>
+        <li>
+          <code>chargeStart</code> - Starts charging of the vehicle (EV only)
+        </li>
+        <li>
+          <code>chargeStop</code> - Stops charging of the vehicle (EV only)
+        </li>
+        <li>
+          <code>turnOnHVAC</code> - Turn on HVAC of the vehicle (EV only)
+        </li>
+        <li>
+          <code>turnOffHVAC</code> - Turn off HVAC of the vehicle (EV only)
+        </li>
+        <li>
+          <code>refreshVehicleStatus</code> - Refresh the status of the vehicle <bold>DANGER:</bold> will drain 12V battery! Use only as needed or during charging of EV!
+        </li>
+        <li>
+          <code>startEngine</code> - Starts vehicle
+        </li>
         <li>
           <code>stopEngine</code> - Stops vehicle (only if started via Mazda Connected Services)
         </li>
-        <li><code>lockDoors</code> - Locks all doors</li>
-        <li><code>unlockDoors</code> - Unlocks all doors</li>
-        <li><code>turnHazardLightsOn</code> - Turns on hazard lights</li>
-        <li><code>turnHazardLightsOff</code> - Turns off hazard lights</li>
+        <li>
+          <code>lockDoors</code> - Locks all doors
+        </li>
+        <li>
+          <code>unlockDoors</code> - Unlocks all doors
+        </li>
+        <li>
+          <code>turnHazardLightsOn</code> - Turns on hazard lights
+        </li>
+        <li>
+          <code>turnHazardLightsOff</code> - Turns off hazard lights
+        </li>
       </ul>
     </dd>
   </dl>

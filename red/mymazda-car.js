@@ -31,15 +31,17 @@ module.exports = function (RED) {
             getStatus(msg)
             break
           case 'getEVVehicleStatus':
-              // Retrieve realtime status of vehicle
-              getEVStatus(msg)
-              break
+            // Retrieve realtime EV status of vehicle
+            getEVStatus(msg)
+            break
           case 'getHVACSetting':
-            // Retrieve realtime status of vehicle
+            // Retrieve realtime HVAC settings of vehicle
             getHVACSetting(msg)
             break
           case 'startEngine':
           case 'stopEngine':
+          case 'chargeStart':
+          case 'chargeStop':
           case 'lockDoors':
           case 'unlockDoors':
           case 'turnHazardLightsOn':
@@ -47,14 +49,16 @@ module.exports = function (RED) {
           case 'turnOnHVAC':
           case 'turnOffHVAC':
           case 'refreshVehicleStatus':
-              await client[cmd](vehicleId)
-              // Nothing to ouput
-              break
+            await client[cmd](vehicleId)
+            break
           case 'sendPOI':
+            node.error(`Command not yet implemented: ${cmd}`)
+            break
           case 'setHVACSetting':
-              node.warn(`Command not yet implemented: ${cmd}`)
+            node.error(`Command not yet implemented: ${cmd}`)
+            break
           default:
-            node.warn(`Command not supported: ${cmd}`)
+            node.error(`Command not supported: ${cmd}`)
         }
       } catch (err) {
         done(err.message)
@@ -88,9 +92,9 @@ module.exports = function (RED) {
       }
     }
 
-    node.on('close', removed => {
-      if (removed) clearInterval(node.pollTimer)
-    })
+ //   node.on('close', removed => {
+ //     if (removed) clearInterval(node.pollTimer)
+ //   })
   }
 
   RED.nodes.registerType('mymazda-car', MyMazdaCar)
