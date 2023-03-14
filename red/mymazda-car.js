@@ -50,6 +50,9 @@ module.exports = function (RED) {
               await client[cmd](vehicleId)
               // Nothing to ouput
               break
+          case 'sendPOI':
+          case 'setHVACSetting':
+              node.warn(`Command not yet implemented: ${cmd}`)
           default:
             node.warn(`Command not supported: ${cmd}`)
         }
