@@ -1,0 +1,86 @@
+[
+    {
+        "id": "54a00b403c9733f8",
+        "type": "tab",
+        "label": "Example Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "be50dda0e036392b",
+        "type": "mymazda-car",
+        "z": "54a00b403c9733f8",
+        "account": "2a5cce1bb6cd21ff",
+        "name": "",
+        "x": 520,
+        "y": 300,
+        "wires": [
+            [
+                "465d8894d570703c"
+            ]
+        ]
+    },
+    {
+        "id": "44275f07fd5e7fcc",
+        "type": "inject",
+        "z": "54a00b403c9733f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "getInfo",
+        "payloadType": "str",
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "be50dda0e036392b"
+            ]
+        ]
+    },
+    {
+        "id": "465d8894d570703c",
+        "type": "debug",
+        "z": "54a00b403c9733f8",
+        "name": "getinfo",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7127bf179b4d52f4",
+        "type": "comment",
+        "z": "54a00b403c9733f8",
+        "name": "",
+        "info": "# Configure the myMazda Node\nUse your My Mazda Credentials from your App or invite a secondary driver to avoid problems to be concurrent logged in from the app and Node-RED.\n",
+        "x": 320,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2a5cce1bb6cd21ff",
+        "type": "mymazda-account",
+        "email": "YourMyMazdaAccount",
+        "region": "MME"
+    }
+]
