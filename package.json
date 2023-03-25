@@ -10,15 +10,16 @@
     "node-mymazda": "^1.1.5"
   },
   "node-red": {
+    "version": ">=2.0.0",
     "nodes": {
       "mymazda-car": "red/mymazda-car.js",
       "mymazda-account": "red/mymazda-account.js"
-    },
-    "version": ">=2.0.0"
+    }
   },
   "keywords": [
     "node-red",
-    "mazda"
+    "mazda",
+    "mymazda"
   ],
   "homepage": "https://github.com/abeggled/node-red-contrib-mymazda",
   "repository": "github:abeggled/node-red-contrib-mymazda",

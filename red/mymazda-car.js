@@ -16,7 +16,6 @@ module.exports = function (RED) {
     node.on('input', async (msg, send, done) => {
       let cmd = msg.payload
       let opts = msg.options || {}
-
       try {
         switch (cmd) {
           case 'getInfo':
@@ -28,28 +27,48 @@ module.exports = function (RED) {
 
           case 'getVehicleStatus':
             // Retrieve realtime status of vehicle
-            getStatus(msg)
+            GetVehicleStatus(msg)
             break
           case 'getEVVehicleStatus':
             // Retrieve realtime EV status of vehicle
-            getEVStatus(msg)
+            GetEVVehicleStatus(msg)
             break
           case 'getHVACSetting':
             // Retrieve realtime HVAC settings of vehicle
-            getHVACSetting(msg)
+            GetHVACSetting(msg)
             break
           case 'startEngine':
+            await client.startEngine(vehicleId)
+            break
           case 'stopEngine':
-          case 'chargeStart':
-          case 'chargeStop':
+            await client.stopEngine(vehicleId)
+            break
+          case 'startCharging':
+            await client.startCharging(vehicleId)
+            break
+          case 'stopCharging':
+            await client.stopCharging(vehicleId)
+            break
           case 'lockDoors':
+            await client.lockDoors(vehicleId)
+            break
           case 'unlockDoors':
+            await client.unlockDoors(vehicleId)
+            break
           case 'turnHazardLightsOn':
+            await client.turnHazardLightsOn(vehicleId)
+            break
           case 'turnHazardLightsOff':
+            await client.turnHazardLightsOff(vehicleId)
+            break
           case 'turnOnHVAC':
+            await client.turnOnHVAC(vehicleId)
+            break
           case 'turnOffHVAC':
+            await client.turnOffHVAC(vehicleId)
+            break
           case 'refreshVehicleStatus':
-            await client[cmd](vehicleId)
+            await client.refreshVehicleStatus(vehicleId)
             break
           case 'sendPOI':
             node.error(`Command not yet implemented: ${cmd}`)
@@ -65,7 +84,7 @@ module.exports = function (RED) {
       }
     })
 
-    async function getStatus(passMsg = {}) {
+    async function GetVehicleStatus(passMsg = {}) {
       try {
         let status = await client.getVehicleStatus(vehicleId)
         node.send({ ...passMsg, topic: 'status', payload: status })
@@ -74,7 +93,7 @@ module.exports = function (RED) {
       }
     }
 
-    async function getEVStatus(passMsg = {}) {
+    async function GetEVVehicleStatus(passMsg = {}) {
       try {
         let status = await client.getEVVehicleStatus(vehicleId)
         node.send({ ...passMsg, topic: 'status', payload: status })
@@ -83,7 +102,7 @@ module.exports = function (RED) {
       }
     }
 
-    async function getHVACSetting(passMsg = {}) {
+    async function GetHVACSetting(passMsg = {}) {
       try {
         let status = await client.getHVACSetting(vehicleId)
         node.send({ ...passMsg, topic: 'status', payload: status })
