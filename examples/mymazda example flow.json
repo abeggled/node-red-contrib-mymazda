@@ -72,7 +72,7 @@
         "type": "comment",
         "z": "54a00b403c9733f8",
         "name": "",
-        "info": "# Configure the myMazda Node\nUse your My Mazda Credentials from your App or invite a secondary driver to avoid problems to be concurrent logged in from the app and Node-RED.\n",
+        "info": "#Configure the myMazda Node\nUse your My Mazda Credentials from your App or invite a secondary driver to avoid problems with concurrent logged in users from the app and Node-RED.\n",
         "x": 320,
         "y": 240,
         "wires": []
